@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import ProductProvider from './context/products';
+import { CartProvider } from './context/cart';
 
 ReactDOM.render(
   <ProductProvider>
-    <App></App>
+    <CartProvider>
+      <App></App>
+    </CartProvider>
   </ProductProvider>,
   document.getElementById('root')
 );
