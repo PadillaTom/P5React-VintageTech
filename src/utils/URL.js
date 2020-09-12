@@ -5,5 +5,8 @@
 // Axios
 //
 // Base URL, to which we will add the "/page" as needed
-export default 'http://johnsmilgatutorials.com/projects/react-tech-store-v2';
+// export default 'http://johnsmilgatutorials.com/projects/react-tech-store-v2';
 // Ej: add "/products"
+
+// Local Host with STRAPI:
+export default 'http://localhost:1337';

@@ -75,12 +75,7 @@ function CartProvider({ children }) {
   //
   // Add to cart
   const addToCart = (product) => {
-    const {
-      id,
-      image: { url },
-      title,
-      price,
-    } = product;
+    const { id, image, title, price } = product;
     // Buscamos el ITEM a partir de su ID, dentro del Array
     const item = [...cart].find((item) => item.id === id);
     // If the selected ITEM IS on the Cary, Increase such amount
@@ -89,7 +84,7 @@ function CartProvider({ children }) {
       return;
     } else {
       // Tomamos dichos datos para crear un NEW ITEM --> SI NO ESTA ALREADY EN EL ARRAY
-      const newItem = { id, image: url, title, price, amount: 1 };
+      const newItem = { id, image, title, price, amount: 1 };
       // Creamos un New ARRAY donde meteremos lo que ya tenemos + el nuevo item creado
       const newCart = [...cart, newItem];
       setCart(newCart);
