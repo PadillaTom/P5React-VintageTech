@@ -1,18 +1,26 @@
 import React from 'react';
 import localCart from '../utils/localCart';
 
+// Get Cart from Local Storage --->
+function GetCartFromLocalStorage() {
+  //
+  return localStorage.getItem('cart') // IF TRUE
+    ? JSON.parse(localStorage.getItem('cart')) // Return the CART from Storage
+    : []; // ELSE --> Return empty array
+}
 // Creamos Context
 const CartContext = React.createContext();
 
 function CartProvider({ children }) {
   //State Variables:
-  const [cart, setCart] = React.useState(localCart);
+  const [cart, setCart] = React.useState(GetCartFromLocalStorage());
   const [total, setTotal] = React.useState();
   const [cartItems, setCartItems] = React.useState();
   //
   // React Use Effect -->  To update easier the CART
   React.useEffect(() => {
-    // Local Storage:
+    // Local Storage: Usando Local Storage, cada vez que se modifique el STATE, se agregará al Storage
+    localStorage.setItem('cart', JSON.stringify(cart));
     //
     // Iterate Array ---->
     // ---> Cart Items Amount:
