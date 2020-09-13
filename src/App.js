@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
+import Alert from './components/Alert';
 // Components:
 import Header from './components/Header';
 // Main Function:
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <Router>
       <Header></Header>
+      <Alert></Alert>
       <Switch>
         <Route exact path='/'>
           <Home></Home>

@@ -5,10 +5,14 @@ import loginUser from '../strapi/loginUser';
 import registerUser from '../strapi/registerUser';
 // Handle User
 import { useHistory } from 'react-router-dom';
+// Context:
+import { UserContext } from '../context/user';
 
 export default function Login() {
   const history = useHistory();
   // Set up User Context:
+  const { userLogin, alert, showAlert } = React.useContext(UserContext);
+
   //
   // State Values:
   const [email, setEmail] = React.useState('');
@@ -16,7 +20,7 @@ export default function Login() {
   const [username, setUser] = React.useState('default');
   const [isMember, setIsMember] = React.useState(true);
   //
-  let isEmpty = !email || !password || !username;
+  let isEmpty = !email || !password || !username || alert.show;
   //
   // Toggle Function:
   const toggleMember = () => {
@@ -28,7 +32,14 @@ export default function Login() {
   };
   //
   const handleSubmit = async (e) => {
+    // Initial Message Alert:
+    showAlert({
+      msg: `Accessing User Data, please wait...`,
+    });
+
+    // Prev Default
     e.preventDefault();
+    // Main:
     let response;
     if (isMember) {
       response = await loginUser({ email, password });
@@ -36,10 +47,24 @@ export default function Login() {
       response = await registerUser({ email, password, username });
     }
     if (response) {
-      console.log('success');
-      console.log(response);
+      // console.log(response); // Vemos que TOKEN(JWT) and USERNAME ---> Estan en DATA.
+      // Destructure para conseguir TOKEN y USERNAME:
+      const {
+        jwt: token,
+        user: { username },
+      } = response.data;
+      // Alojamos:
+      const newUser = { token, username };
+      // Log: --> Pasamos los datos y redireccionamos a PRODUCTS
+      userLogin(newUser);
+      history.push('/products');
+      // Mandamos un ALERT de success:
+      showAlert({
+        msg: `Successfully Logged In as: ${username}. Happy Shopping`,
+      });
     } else {
-      // show alert
+      // Mandamos ALERT Danger:
+      showAlert({ msg: `Please try Again...`, type: 'danger' });
     }
   };
   //
