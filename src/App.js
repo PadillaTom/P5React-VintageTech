@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 import Alert from './components/Alert';
+import PrivateRoute from './components/PrivateRoute';
 // Components:
 import Header from './components/Header';
 // Main Function:
@@ -30,9 +31,9 @@ export default function App() {
         <Route path='/cart'>
           <Cart></Cart>
         </Route>
-        <Route path='/checkout'>
+        <PrivateRoute path='/checkout'>
           <Checkout></Checkout>
-        </Route>
+        </PrivateRoute>
         <Route path='/login'>
           <Login></Login>
         </Route>

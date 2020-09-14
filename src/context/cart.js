@@ -93,7 +93,8 @@ function CartProvider({ children }) {
   //
   // Clear Cart
   const clearCart = () => {
-    //
+    // Set a Empty Array
+    setCart([]);
   };
   //
   return (
